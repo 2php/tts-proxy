@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+    <!-- 初始化守护线程 此listener必须最后加载 -->
+    <listener>
+        <listener-class>com.tinet.ttssc.init.Daemon</listener-class>
+    </listener>
+	<servlet>
+		<servlet-name>ttsGet</servlet-name>
+		<servlet-class>com.tinet.ttssc.TtsGet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ttsGet</servlet-name>
+		<url-pattern>/interface/ttsGet</url-pattern>
+	</servlet-mapping>
+    <servlet>
+        <servlet-name>ttsMonitor</servlet-name>
+        <servlet-class>com.tinet.ttssc.Monitor</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ttsMonitor</servlet-name>
+        <url-pattern>/interface/ttsMonitor</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>serverAction</servlet-name>
+        <servlet-class>com.tinet.ttssc.ServerAction</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>serverAction</servlet-name>
+        <url-pattern>/interface/serverAction</url-pattern>
+    </servlet-mapping>
+</web-app>

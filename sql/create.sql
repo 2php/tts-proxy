@@ -1,0 +1,2 @@
+-- 创建语言
+--CREATE LANGUAGE plpgsql;
