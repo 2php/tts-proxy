@@ -1,32 +1,22 @@
 package com.tinet.ttssc;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
-import com.tinet.ttssc.entity.TtsMonitor;
-import com.tinet.ttssc.entity.TtsRequest;
 import com.tinet.ttssc.entity.TtsServer;
-import com.tinet.ttssc.inc.Const;
 import com.tinet.ttssc.inc.Macro;
-import com.tinet.ttssc.service.SystemSettingService;
 import com.tinet.ttssc.service.TtsServerService;
 import com.tinet.ttssc.util.DateUtil;
-import com.tinet.ttssc.util.MD5Encoder;
-import com.tinet.ttssc.util.RemoteClient;
-import com.tinet.ttssc.util.StringUtil;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 public class ServerAction extends HttpServlet {
 	public boolean ttsDone = false;

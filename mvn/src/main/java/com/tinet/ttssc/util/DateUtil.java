@@ -5,9 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.apache.log4j.Logger;
-
-import com.tinet.ttssc.TtssEngine;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -214,7 +213,7 @@ public class DateUtil {
 		return (int)((date2.getTime() - date1.getTime())/1000);
 	}
 	
-	private static Logger logger = Logger.getLogger(DateUtil.class);
+	private static Logger logger = LoggerFactory.getLogger(DateUtil.class);
 	private static String timePattern = "HH:mm";
 
 	// ~ Methods

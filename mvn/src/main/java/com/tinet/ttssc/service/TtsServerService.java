@@ -10,7 +10,6 @@ import java.util.List;
 import com.tinet.ttssc.db.DbConnect;
 import com.tinet.ttssc.entity.TtsServer;
 import com.tinet.ttssc.inc.Const;
-import com.tinet.ttssc.inc.Macro;
 
 public class TtsServerService {
 	public static List<TtsServer> init(){

@@ -3,18 +3,14 @@ package com.tinet.ttssc.entity;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.tinet.ttssc.TtsGet;
 import com.tinet.ttssc.db.DbConnect;
 import com.tinet.ttssc.inc.Const;
-import com.tinet.ttssc.inc.Macro;
 import com.tinet.ttssc.util.DateUtil;
 
 

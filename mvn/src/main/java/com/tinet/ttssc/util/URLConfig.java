@@ -1,6 +1,5 @@
 package com.tinet.ttssc.util;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -14,7 +13,7 @@ public class URLConfig {
 	//URLConfig.getInstance().getString("webRoot");
 	private static Properties prop = new Properties();
 	private static URLConfig instance=null;
-	private static String propertiesURL="/conf/jdbc.properties";
+	private static String propertiesURL="/jdbc.properties";
 	
 	private URLConfig(){
 		try {

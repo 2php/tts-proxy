@@ -1,29 +1,18 @@
 package com.tinet.ttssc;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.TimerTask;
-import java.util.UUID;
-import java.util.concurrent.PriorityBlockingQueue;
-import java.util.concurrent.TimeUnit;
-
-import org.apache.log4j.Logger;
 
 import com.tinet.ttssc.db.DbConnect;
-import com.tinet.ttssc.entity.TtsRequest;
-import com.tinet.ttssc.entity.TtsServer;
 import com.tinet.ttssc.inc.Const;
 import com.tinet.ttssc.service.SystemSettingService;
 import com.tinet.ttssc.util.DateUtil;
 
 
 public class CleanThread extends TimerTask  implements Runnable{
-	private static Logger logger = Logger.getLogger(CleanThread.class);
-	
 	
 	public void run(){
 		Connection conn = DbConnect.getConnection(Const.DB_POOL_NAME);

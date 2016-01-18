@@ -5,9 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.TimerTask;
 
-import net.sf.json.JSONObject;
-
-import org.apache.log4j.Logger;
 import org.postgresql.util.PGobject;
 
 import com.tinet.ttssc.db.DbConnect;
@@ -16,9 +13,6 @@ import com.tinet.ttssc.inc.Const;
 
 
 public class MonitorThread extends TimerTask  implements Runnable{
-	private static Logger logger = Logger.getLogger(MonitorThread.class);
-	
-	
 	public void run(){
 		TtsMonitor monitor = Monitor.getMonitor();
 		Connection conn = DbConnect.getConnection(Const.DB_POOL_NAME);

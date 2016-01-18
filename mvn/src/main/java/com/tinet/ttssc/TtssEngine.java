@@ -6,7 +6,8 @@ import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.tinet.ttssc.entity.TtsRequest;
 import com.tinet.ttssc.entity.TtsServer;
@@ -17,7 +18,7 @@ import com.tinet.ttssc.service.SystemSettingService;
 public class TtssEngine extends Thread{
 	private static PriorityBlockingQueue<TtsRequest> queue = new PriorityBlockingQueue<TtsRequest>();
 	private static Integer MAX_COUNT = 200;
-	private static Logger logger = Logger.getLogger(TtssEngine.class);
+	private static Logger logger = LoggerFactory.getLogger(TtssEngine.class);
 	private static boolean terminated = false;
 	private static AtomicInteger dealCount = new AtomicInteger(0);
 	private static AtomicInteger failCount = new AtomicInteger(0);
