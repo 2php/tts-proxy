@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-	<contextName>ttssc</contextName>
+	<contextName>tts-proxy</contextName>
 
 	<!-- 输出到控制台 -->
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -17,7 +17,7 @@
 			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
 		</encoder>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<FileNamePattern>/var/log/ccic/ttssc/debug.%d{yyyyMMdd}.log</FileNamePattern>
+			<FileNamePattern>/var/log/ccic/tts-proxy/debug.%d{yyyyMMdd}.log</FileNamePattern>
 			<MaxHistory>10</MaxHistory>
 		</rollingPolicy>
 		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
