@@ -198,7 +198,9 @@ public class TtsGet extends HttpServlet {
 		if(ttsRequest.getSync().equals(1)){
 			//System.out.println("等待结束，判断是否完成 Thread" + Thread.currentThread() + "ttsRequest.isDone=" + ttsRequest.isDone());
 			if(ttsRequest.isDone()){
-				String webfileName = Const.AWS_TTS_CACHE_URL + "/" + ttsRequest.getHash().substring(0,2) + "/" + ttsRequest.getHash() + ".wav";
+				String bucketName = SystemSettingService.getSystemSetting(Const.S3_BUCKET).getValue();
+				
+				String webfileName = "http://" + bucketName + "." + Const.AWS_TTS_CACHE_URL_POSTFIX + "/" + ttsRequest.getHash().substring(0,2) + "/" + ttsRequest.getHash() + ".wav";
 				//System.out.println("合成完成，文件："+webfileName + "时间=" + System.currentTimeMillis() + " thread:" + Thread.currentThread());
 				//System.out.println("合成完成，文件绝对路径："+fileName);
 	    		
