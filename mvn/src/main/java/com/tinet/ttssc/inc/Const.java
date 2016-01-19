@@ -12,6 +12,6 @@ public class Const {
 	public static String AWS_CREDENTIAL = "aws_credential";
 	public static String DYNAMODB_TABLE = "tts-cache";
 	public static String DYNAMODB_PRIMARY_ID = "key";
-	public static String AWS_TTS_CACHE_URL = "http://tinet-tts-cache.s3-website.cn-north-1.amazonaws.com.cn";
+	public static String AWS_TTS_CACHE_URL_POSTFIX = "s3-website.cn-north-1.amazonaws.com.cn";
 	
 }

@@ -79,8 +79,8 @@ public class AwsDynamoDbService {
 		setting.setCreateTime(new Date());
 		setting.setId(1);
 		setting.setName(Const.AWS_CREDENTIAL);
-		setting.setValue("AKIAONGNWNAKPRAIAAAQ");
-		setting.setProperty("lw/H5RR0pSXbSqjUrh+OqcLZGYS6n/ryXcfpw9HR");
+		setting.setValue("");
+		setting.setProperty("");
 		Macro.systemSettings.add(setting);
 		
 		AwsDynamoDbService.init();
