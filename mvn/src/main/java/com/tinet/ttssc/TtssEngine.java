@@ -1,6 +1,9 @@
 package com.tinet.ttssc;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.UUID;
 import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.TimeUnit;
@@ -12,6 +15,8 @@ import org.slf4j.LoggerFactory;
 import com.tinet.ttssc.entity.TtsRequest;
 import com.tinet.ttssc.entity.TtsServer;
 import com.tinet.ttssc.inc.Const;
+import com.tinet.ttssc.service.AwsDynamoDbService;
+import com.tinet.ttssc.service.AwsS3Service;
 import com.tinet.ttssc.service.SystemSettingService;
 
 
@@ -95,9 +100,30 @@ public class TtssEngine extends Thread{
 									}
 								}
 							}else{
-								//Thread.sleep(20*1000);
+								boolean success = false;
+								File tmp = new File(fileName);
+								if(tmp.exists()){
+									FileInputStream fis = null;
+							        fis = new FileInputStream(tmp);
+							        Integer size = fis.available();
+							        System.out.println(fileName + " size=" + size);
+							        if(size > 44){
+							    		String s3FileName = ttsRequest.getHash().substring(0,2) + "/" + ttsRequest.getHash() + ".wav";
+							    		if(AwsS3Service.upload(fileName, s3FileName)){
+							    			long createTime = new Date().getTime()/1000; 
+							    			HashMap<String, Object> params = new HashMap<String, Object>();
+							    			params.put("createTime", createTime);
+							    			params.put("text", ttsRequest.getText());
+							    			if(AwsDynamoDbService.createItem(Const.DYNAMODB_TABLE, Const.DYNAMODB_PRIMARY_ID, ttsRequest.getHash(), params)){
+							    				success = true;
+							    			}
+							    		}
+							        }
+								    fis.close();
+								    tmp.delete();
+								}
 								synchronized (ttsRequest.getNotifyThread()) {
-									ttsRequest.setDone(true);
+									ttsRequest.setDone(success);
 									ttsRequest.getNotifyThread().notifyAll();
 								}
 							}

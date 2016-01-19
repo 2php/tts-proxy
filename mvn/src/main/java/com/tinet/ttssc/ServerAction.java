@@ -14,9 +14,8 @@ import com.tinet.ttssc.entity.TtsServer;
 import com.tinet.ttssc.inc.Macro;
 import com.tinet.ttssc.service.TtsServerService;
 import com.tinet.ttssc.util.DateUtil;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
+import com.tinet.ttssc.util.JSONArray;
+import com.tinet.ttssc.util.JSONObject;
 
 public class ServerAction extends HttpServlet {
 	public boolean ttsDone = false;

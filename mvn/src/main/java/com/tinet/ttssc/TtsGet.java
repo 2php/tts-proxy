@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
@@ -15,7 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.tinet.ttssc.entity.TtsRequest;
 import com.tinet.ttssc.inc.Const;
 import com.tinet.ttssc.inc.Macro;
+import com.tinet.ttssc.service.AwsDynamoDbService;
+import com.tinet.ttssc.service.AwsS3Service;
 import com.tinet.ttssc.service.SystemSettingService;
+import com.tinet.ttssc.util.JSONObject;
 import com.tinet.ttssc.util.MD5Encoder;
 import com.tinet.ttssc.util.RemoteClient;
 import com.tinet.ttssc.util.StringUtil;
@@ -104,7 +109,7 @@ public class TtsGet extends HttpServlet {
 		}else{
 			ttsRequest.setRedirect(1);
 		}
-		String volumeStr	= request.getParameter("volume");
+		String volumeStr = request.getParameter("volume");
 		if(StringUtil.isNotEmpty(volumeStr) && StringUtil.isNumber(volumeStr)){
 			Integer volume = Integer.parseInt(volumeStr);
 			if(volume >= -20 && volume <= 20){
@@ -153,7 +158,8 @@ public class TtsGet extends HttpServlet {
 		
 		
 		String fileName = SystemSettingService.getSystemSetting(Const.TTS_CACHE_ABS_PATH).getValue() + "/" + ttsRequest.getHash().substring(0,2) + "/" + ttsRequest.getHash() + ".wav"; 
-		if(new File(fileName).exists()){
+		List<JSONObject> list = AwsDynamoDbService.query(Const.DYNAMODB_TABLE, Const.DYNAMODB_PRIMARY_ID, ttsRequest.getHash());
+		if(list.size() > 0){
 			ttsRequest.setStartTime(new Date());
 			ttsRequest.setHitCache(1);
 			ttsRequest.setPosition(0);
@@ -192,35 +198,17 @@ public class TtsGet extends HttpServlet {
 		if(ttsRequest.getSync().equals(1)){
 			//System.out.println("等待结束，判断是否完成 Thread" + Thread.currentThread() + "ttsRequest.isDone=" + ttsRequest.isDone());
 			if(ttsRequest.isDone()){
-				String webfileName = SystemSettingService.getSystemSetting(Const.TTS_CACHE_PATH).getValue() + "/" + ttsRequest.getHash().substring(0,2) + "/" + ttsRequest.getHash() + ".wav";
+				String webfileName = Const.AWS_TTS_CACHE_URL + "/" + ttsRequest.getHash().substring(0,2) + "/" + ttsRequest.getHash() + ".wav";
 				//System.out.println("合成完成，文件："+webfileName + "时间=" + System.currentTimeMillis() + " thread:" + Thread.currentThread());
 				//System.out.println("合成完成，文件绝对路径："+fileName);
-				File tmp = new File(fileName);
-				if(tmp.exists()){
-					FileInputStream fis = null;
-			        fis = new FileInputStream(tmp);
-			        Integer size = fis.available();
-			        System.out.println(fileName + " size=" + size);
-			        if(size > 44){
-			        	if(ttsRequest.getRedirect().equals(1)){
-			        		response.sendRedirect(webfileName);
-			        	}else{
-				        	out.append("success");
-							out.flush();
-							out.close();
-			        	}
-			        }else{
-			        	System.out.println("文件大小错误 " + fileName);
-			        	out.append("文件大小错误");
-						out.flush();
-						out.close();
-			        }
-				}else{
-					System.out.println("文件不存在 " + fileName);
-					out.append("文件不存在");
+	    		
+    			if(ttsRequest.getRedirect().equals(1)){
+	        		response.sendRedirect(webfileName);
+	        	}else{
+		        	out.append("success");
 					out.flush();
 					out.close();
-				}
+	        	}
 			}else{
 				out.append("合成超时");
 				out.flush();

@@ -12,6 +12,8 @@ import com.tinet.ttssc.db.DbConnect;
 import com.tinet.ttssc.entity.TtsServer;
 import com.tinet.ttssc.inc.Const;
 import com.tinet.ttssc.inc.Macro;
+import com.tinet.ttssc.service.AwsDynamoDbService;
+import com.tinet.ttssc.service.AwsS3Service;
 import com.tinet.ttssc.service.SystemSettingService;
 import com.tinet.ttssc.service.TtsServerService;
 import com.tinet.ttssc.util.StringUtil;
@@ -59,6 +61,9 @@ public class Daemon implements javax.servlet.ServletContextListener {
 		DbConnect.init();
 		//初始化sytemSetting
 		SystemSettingService.init();
+		//初始化AWS
+		AwsS3Service.init();
+		AwsDynamoDbService.init();
 		//初始化目录
 		String path = SystemSettingService.getSystemSetting(Const.TTS_CACHE_ABS_PATH).getValue();
 		if(StringUtil.isNotEmpty(path)){

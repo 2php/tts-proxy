@@ -4,8 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.tinet.ttssc.TtssEngine;
-
-import net.sf.json.JSONObject;
+import com.tinet.ttssc.util.JSONObject;
 
 
 

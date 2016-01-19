@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,9 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.tinet.ttssc.entity.TtsMonitor;
 import com.tinet.ttssc.inc.Macro;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
+import com.tinet.ttssc.util.JSONArray;
+import com.tinet.ttssc.util.JSONObject;
 
 public class Monitor extends HttpServlet {
 	public boolean ttsDone = false;
@@ -89,11 +89,9 @@ public class Monitor extends HttpServlet {
 		return monitor;
 	}
 	public String json2plain(String prefix, JSONObject object, StringBuilder sb){
-	    Iterator<String> keys = object.keys();  
+	    Set<String> keys = object.keySet();
 	    Object o;  
-	    String key;  
-	    while(keys.hasNext()){  
-	        key=keys.next();  
+	    for(String key: keys){
 	        try {
 				o=object.get(key);
 				if(prefix==null || prefix.equals("")){
