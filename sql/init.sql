@@ -7,5 +7,5 @@ insert into system_setting(name,value,property) values('alarm_email','vocp_list@
 insert into system_setting(name,value,property) values('admin','admin','123456');  -- 管理员账号密码
 insert into system_setting(name,value,property) values('admin','anjb','123456');  -- 管理员账号密码 可以有多个管理员
 insert into system_setting(name,value,property) values('monitor_conf', '30', '7'); -- 监控设置 value中为监控间隔秒数，默认10秒，property中为保存表天数默认7天
-insert into system_setting(name,value,property) values('s3_bucket', 'tinet_tts_cache_test', ''); -- s3上的桶名
+insert into system_setting(name,value,property) values('s3_bucket', 'tinet-tts-cache', ''); -- s3上的桶名
 insert into system_setting(name,value,property) values('aws_credential', '', ''); -- aws accessKey & aws secretKey
